@@ -31,10 +31,10 @@ class SignupRequest extends FormRequest
             'hobbies' => 'required',
             // 'avatar' => 'required',
             // 'status' => 'required',
-            'price' => 'numeric|required_if:gender,'.User::FEMALE,
-            'bank_id' => 'required_if:gender,'.User::FEMALE,
-            'account_number' => 'numeric|required_if:gender,'.User::FEMALE,
-            'account_holder_name' => 'required_if:gender,'.User::FEMALE,
+            'price' => 'numeric|required_if:gender,' . User::FEMALE,
+            'bank_id' => 'required_if:gender,' . User::FEMALE,
+            'account_number' => 'numeric|required_if:gender,' . User::FEMALE,
+            'account_holder_name' => 'required_if:gender,' . User::FEMALE,
         ];
     }
 
@@ -50,6 +50,6 @@ class SignupRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(apiJsonResponse(false, '', 422, ['errors' => $validator->errors()]));
+        throw new HttpResponseException(apiJsonResponse(false, $validator->errors()->first(), 422));
     }
 }

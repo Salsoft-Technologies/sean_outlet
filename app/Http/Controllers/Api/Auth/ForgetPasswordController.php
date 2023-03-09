@@ -19,9 +19,7 @@ class ForgetPasswordController extends Controller
             'email' => 'required|email|exists:users,email',
         ]);
         if($validator->fails()){
-            return apiJsonResponse(false, '', 422, [
-                'errors' => $validator->errors(),
-            ]);
+            return apiJsonResponse(false, $validator->errors()->first(), 422);
         }
 
         try{
@@ -76,9 +74,7 @@ class ForgetPasswordController extends Controller
             'confirm_password' => 'same:password',
         ]);
         if($validator->fails()){
-            return apiJsonResponse(false, '', 422, [
-                'errors' => $validator->errors(),
-            ]);
+            return apiJsonResponse(false, $validator->errors()->first(), 422);
         }
 
         try{
