@@ -67,4 +67,8 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    // public function date_logs(){
+    //     return $this->hasMany(DateBooking::class, 'male_id');
+    // }
 }

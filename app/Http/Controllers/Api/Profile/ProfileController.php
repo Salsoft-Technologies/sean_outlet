@@ -55,9 +55,7 @@ class ProfileController extends Controller
 
     public function notifications_list(){
         $user = User::find(Auth::id());
-        return apiJsonResponse(true, '', 200, [
-            'notifications' => $user->notifications,
-        ]);
+        return apiJsonResponse(true, '', 200, $user->notifications);
     }
 
     public function contact_us(ContactUsRequest $request){

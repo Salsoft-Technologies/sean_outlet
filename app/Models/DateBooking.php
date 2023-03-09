@@ -31,6 +31,10 @@ class DateBooking extends Model
         return $this->belongsTo(User::class, 'female_id');
     }
 
+    public function male_info(){
+        return $this->belongsTo(User::class, 'male_id');
+    }
+
     public function slot_info(){
         return $this->belongsTo(TimeSlot::class, 'slot_id');
     }

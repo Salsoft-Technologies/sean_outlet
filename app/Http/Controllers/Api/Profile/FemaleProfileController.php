@@ -36,7 +36,7 @@ class FemaleProfileController extends Controller
     }
 
     public function bank_details(){
-        $bank_details = BankDetail::find(Auth::id());
+        $bank_details = BankDetail::where('user_id', Auth::id())->get();
         return apiJsonResponse(true, "", 200, $bank_details);
     }
 
@@ -69,7 +69,11 @@ class FemaleProfileController extends Controller
     }
 
     public function male_requests(Request $request){
-        $date_requests = DateRequest::where('status', $request->status)->where('female_id', Auth::id())->get();
+        if(isset($request->status)){
+            $date_requests = DateRequest::where('status', $request->status)->where('female_id', Auth::id())->get();
+        }else{
+            $date_requests = DateRequest::where('female_id', Auth::id())->get();
+        }
         return apiJsonResponse(true, "", 200, MaleRequestsResource::collection($date_requests));
     }
     

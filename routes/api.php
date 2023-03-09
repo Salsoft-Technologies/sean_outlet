@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Auth\ForgetPasswordController;
 use App\Http\Controllers\Api\Profile\ProfileController;
 use App\Http\Controllers\Api\Profile\MaleProfileController;
 use App\Http\Controllers\Api\Profile\FemaleProfileController;
+use App\Http\Controllers\Api\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,23 +20,33 @@ use App\Http\Controllers\Api\Profile\FemaleProfileController;
 |
 */
 
-Route::controller(AuthController::class)->group(function(){
+Route::controller(AuthController::class)->group(function () {
     // auth routes
     Route::post('/login', 'login');
     Route::post('/signup', 'signup');
     Route::post('/logout', 'logout')->middleware('auth:sanctum');
 });
 
-Route::controller(ForgetPasswordController::class)->group(function(){
+Route::controller(ForgetPasswordController::class)->group(function () {
     // forget password
     Route::post('/forgot-password', 'forgot_password');
     Route::post('/verify-code', 'verify_code');
     Route::post('/set-password', 'set_password');
 });
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function () {
+    // admin apis
+    Route::controller(AdminController::class)->prefix('/admin')->group(function () {
+        Route::get('/dashboard', 'dashboard');
+        Route::get('/get-males', 'get_males_list');
+        Route::get('/get-male-details', 'get_male_details');
+        Route::get('/get-male-date-logs', 'get_male_date_logs');
+        Route::get('/get-females', 'get_females_list');
+        Route::get('/get-female-details', 'get_female_details');
+        Route::get('/get-female-date-logs', 'get_female_date_logs');
+    });
     // both male and female profile routes
-    Route::controller(ProfileController::class)->group(function(){
+    Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'profile');
         Route::get('/notifications-list', 'notifications_list');
         Route::get('/terms-condition', 'terms_condition');
@@ -46,7 +57,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/contact-us', 'contact_us');
     });
     // female profile routes
-    Route::controller(FemaleProfileController::class)->group(function(){
+    Route::controller(FemaleProfileController::class)->group(function () {
         Route::get('/banks', 'banks');
         Route::get('/male-profile', 'male_profile');
         Route::get('/bank-details', 'bank_details');
@@ -60,7 +71,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/report-user', 'report_user');
     });
     // male profile routes
-    Route::controller(MaleProfileController::class)->group(function(){
+    Route::controller(MaleProfileController::class)->group(function () {
         Route::get('/female-list', 'female_list');
         Route::get('/female-profile', 'female_profile');
         Route::get('/booking-logs', 'booking_logs');
