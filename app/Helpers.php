@@ -39,6 +39,12 @@ function uploadManyImages($images){
     return true;
 }
 
+// calculate admin commission
+function get_admin_commission($price, $commission_percent){
+    $admin_commission = ($price/100) * $commission_percent;
+    return $admin_commission;
+}
+
 // return response in json format
 function apiJsonResponse($success, $message, $http = 200 ,$data = null){
     return response()->json([

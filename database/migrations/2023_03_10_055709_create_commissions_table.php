@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportUserTable extends Migration
+class CreateCommissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateReportUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_user', function (Blueprint $table) {
+        Schema::create('commissions', function (Blueprint $table) {
             $table->id();
-            $table->integer('female_id');
-            $table->integer('male_id');
-            $table->text('reason');
+            $table->string('old_commission');
+            $table->string('new_commission');
+            $table->string('effective_date');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateReportUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_user');
+        Schema::dropIfExists('commissions');
     }
 }

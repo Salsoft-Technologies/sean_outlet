@@ -21,6 +21,7 @@ class CreateDateBookingsTable extends Migration
             $table->integer('cvv');
             $table->string('expiry_date');
             $table->integer('price');
+            $table->float('commission');
             $table->foreignId('female_id')->constrained('users');
             $table->foreignId('slot_id')->constrained('time_slots');
             $table->string('status');

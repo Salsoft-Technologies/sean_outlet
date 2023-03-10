@@ -44,6 +44,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/get-females', 'get_females_list');
         Route::get('/get-female-details', 'get_female_details');
         Route::get('/get-female-date-logs', 'get_female_date_logs');
+        Route::get('/get-commission-rate', 'get_commission_rate');
+        Route::post('/add-new-commission', 'add_new_commission');
+        Route::post('/update-user-status', 'update_user_status');
+        Route::get('/misconduct-report', 'misconduct_report');
+        Route::get('/view-misconduct-report', 'view_misconduct_report');
+        Route::get('/get-user-feedback', 'get_user_feedback');
+        Route::get('/view-feedback-details', 'view_feedback_details');
+        Route::get('/get-payment-logs', 'get_payment_logs');
+        Route::get('/get-notifications', 'get_notifications');
+        Route::get('/notification/{id}', 'read_notification');
     });
     // both male and female profile routes
     Route::controller(ProfileController::class)->group(function () {

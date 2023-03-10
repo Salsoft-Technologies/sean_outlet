@@ -21,6 +21,9 @@ class User extends Authenticatable
     public const MALE = '1';
     public const FEMALE = '0';
 
+    public const ACTIVE = '1';
+    public const INACTIVE = '0';
+
     protected $fillable = [
         'full_name',
         'user_name',
@@ -52,19 +55,23 @@ class User extends Authenticatable
         'hobbies' => 'array',
     ];
 
-    public function time_slot(){
+    public function time_slot()
+    {
         return $this->hasMany(TimeSlot::class);
     }
 
-    public function bank_detail(){
+    public function bank_detail()
+    {
         return $this->hasOne(BankDetail::class);
     }
 
-    public function my_images(){
+    public function my_images()
+    {
         return $this->hasMany(Image::class);
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 

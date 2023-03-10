@@ -98,7 +98,7 @@ class FemaleProfileController extends Controller
     }
 
     public function report_user(ReportUserRequest $request){
-        $report = ReportUser::create($request->all());
+        $report = ReportUser::create(['female_id' => Auth::id(), 'male_id' => $request->user_id, 'reason' => $request->reason]);
         return apiJsonResponse(true, "Your report will be reviewed soon.");
     }
 }

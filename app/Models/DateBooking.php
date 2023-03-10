@@ -23,7 +23,8 @@ class DateBooking extends Model
         'expiry_date',
         'female_id', 
         'slot_id', 
-        'price', 
+        'price',
+        'commission',
         'status'
     ];
 

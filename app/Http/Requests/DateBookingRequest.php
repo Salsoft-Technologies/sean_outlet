@@ -21,7 +21,7 @@ class DateBookingRequest extends FormRequest
             'cvv' => 'required',
             'expiry_date' => 'required',
             'female_id' => 'required',
-            'slot_id' => 'required',
+            'slot_id' => 'required|unique:date_bookings,slot_id',
         ];
     }
 

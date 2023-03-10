@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Profile;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\TimeSlot;
 use App\Models\DateRequest;
@@ -13,6 +14,7 @@ use App\Http\Resources\BookingLogsResource;
 use App\Http\Requests\RequestDateRequest;
 use App\Http\Requests\DateBookingRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Commission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,7 +50,9 @@ class MaleProfileController extends Controller
 
     public function book_date(DateBookingRequest $request){
         $female = User::find($request->female_id);
+        $commission = Commission::where('effective_date', '<=', Carbon::today())->latest()->first();
         $request->merge(['price' => $female->price]);
+        $request->merge(['commission' => get_admin_commission($female->price, $commission->new_commission)]);
         $request->merge(['male_id' => Auth::id()]);
         $request->merge(['status' => DateBooking::UPCOMING]);
         $date_booking = DateBooking::create($request->all());
