@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class ForgetPasswordController extends Controller
@@ -38,7 +37,7 @@ class ForgetPasswordController extends Controller
             try{
                 Mail::to($request->email)->send(new PasswordResetCodeMail($user, $code));
             }catch (\Exception $exception){
-                Log::error($exception->getMessage());
+                // Log::error($exception->getMessage());
                 return apiJsonResponse(false, $exception->getMessage(), 500); 
             }
 
