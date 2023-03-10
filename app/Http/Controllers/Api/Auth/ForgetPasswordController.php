@@ -45,7 +45,7 @@ class ForgetPasswordController extends Controller
             return apiJsonResponse(true, 'We have sent you a verification code');
             
         }catch(\Exception $e){
-            Log::error($e->getMessage());
+            // Log::error($e->getMessage());
             return apiJsonResponse(false, $e->getMessage(), 500);            
         }
 
@@ -62,7 +62,7 @@ class ForgetPasswordController extends Controller
                 return apiJsonResponse(false, 'Invalid code, please try again.', 422);
             }
         }catch(\Exception $e){
-            Log::error($e->getMessage());
+            // Log::error($e->getMessage());
             return apiJsonResponse(false, $e->getMessage(), 500);            
         } 
     }
@@ -90,7 +90,7 @@ class ForgetPasswordController extends Controller
             DB::table('password_resets')->where('token',$code->token)->where('email',$request->email)->delete();
             return apiJsonResponse(true, 'Password updated successfully.');
         }catch(\Exception $e){
-            Log::error($e->getMessage());
+            // Log::error($e->getMessage());
             return apiJsonResponse(false, $e->getMessage(), 500);            
         }        
     }
